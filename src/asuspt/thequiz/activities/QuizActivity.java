@@ -11,6 +11,8 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -78,6 +80,7 @@ public class QuizActivity extends Activity
 		// submit button
 		submitButton = new Button(getApplicationContext());
 		submitButton.setText("Submit");
+		submitButton.setTextColor(0xff2186AD);
 		submitButton.setOnClickListener(new OnClickListener()
 		{
 			public void onClick(View arg0)
@@ -89,6 +92,7 @@ public class QuizActivity extends Activity
 		// clear button
 		clearButton = new Button(getApplicationContext());
 		clearButton.setText("Clear");
+		clearButton.setTextColor(0xff2186AD);
 		clearButton.setOnClickListener(new OnClickListener()
 		{
 			public void onClick(View arg0)
