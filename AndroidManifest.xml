@@ -20,6 +20,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <!-- add   <category android:name="android.intent.category.LAUNCHER" /> here to make it the main activity-->
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         
@@ -29,7 +30,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <!-- add   <category android:name="android.intent.category.LAUNCHER" /> here to make it the main activity-->
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         

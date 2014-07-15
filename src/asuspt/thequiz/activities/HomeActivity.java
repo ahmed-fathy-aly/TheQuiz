@@ -1,17 +1,16 @@
 package asuspt.thequiz.activities;
 
-import android.os.Bundle;
 import android.app.Activity;
-import android.text.Layout;
-import android.view.Menu;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
 import asuspt.thequiz.R;
-import asuspt.thequiz.R.layout;
-import asuspt.thequiz.R.menu;
 
 /**
  * The home page
+ * 
  * @author ahmed mohsen
- *
+ * 
  */
 public class HomeActivity extends Activity
 {
@@ -21,8 +20,17 @@ public class HomeActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-		
+
 	}
 
+	/**
+	 * Listener for the start activity button
+	 */
+	public void startQuiz(View v)
+	{
+		// start quiz activity
+		Intent intent = new Intent(this, QuizActivity.class);
+		startActivity(intent);
+	}
 
 }
