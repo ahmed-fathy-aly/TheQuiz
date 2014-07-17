@@ -17,4 +17,17 @@ public class LoginRegisterServer
 		else
 			return false;		
 	}
+
+	
+	/**
+	 * adds an account with that id and password to the database
+	 * @return true if the account is adde succesfylu
+	 */
+	public static Boolean registerAccount(String id, String password, String name)
+	{
+		if (id.equals("nope"))
+			return false;
+		else
+			return true;
+	}
 }
