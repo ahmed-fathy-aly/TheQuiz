@@ -1,8 +1,13 @@
 package asuspt.thequiz.activities;
 
+import java.util.prefs.Preferences;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import asuspt.thequiz.R;
+import asuspt.thequiz.data.StudentInfo;
+import asuspt.thequiz.utils.MyUtils;
 import asuspt.thequiz.web.LoginRegisterServer;
 
 public class LoginActivity extends Activity
@@ -27,6 +34,7 @@ public class LoginActivity extends Activity
 		super.onCreate(savedInstanceState);
 
 		setGui();
+		loadLoginInfoFromPreferences();
 	}
 
 	/**
@@ -99,6 +107,12 @@ public class LoginActivity extends Activity
 					Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_LONG)
 							.show();
 
+					// get id and password and save them in pregferences
+					// get the id and password
+					String id = editTextId.getText().toString();
+					String password = editTextPassword.getText().toString();
+					MyUtils.saveLoginInfoInPreferences(new StudentInfo(id, password), getApplicationContext());
+
 					Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
 					startActivity(intent);
 				} else
@@ -110,4 +124,12 @@ public class LoginActivity extends Activity
 		}.execute(0);
 	}
 
+
+
+	private void loadLoginInfoFromPreferences()
+	{
+		StudentInfo studentInfo = MyUtils.loadLoginInfoFromPreferences(getApplicationContext());
+			editTextId.setText(studentInfo.getId());
+			editTextPassword.setText(studentInfo.getPassword());
+	}
 }
