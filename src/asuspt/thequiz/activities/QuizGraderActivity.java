@@ -39,15 +39,13 @@ public class QuizGraderActivity extends Activity
 	 */
 	private void loadGrade()
 	{
-		int totalScore = 0;
-		int maximumScore = 0;
+		String grade;
 		try
 		{
 			Bundle extras = getIntent().getExtras();
-			totalScore = extras.getInt(MyUtils.TOTAL_SCORE);
-			maximumScore = extras.getInt(MyUtils.MAXIMUM_SCORE);
+			grade = extras.getString(MyUtils.GRADE);
 			textViewGrade = (TextView) findViewById(R.id.textViewGrade);
-			textViewGrade.setText("Grade : " + totalScore + "/" + maximumScore);
+			textViewGrade.setText("Grade : " + grade);
 
 		} catch (Exception e)
 		{
@@ -61,6 +59,7 @@ public class QuizGraderActivity extends Activity
 		// Do something in response to button
 		Intent intent = new Intent(this, QuizActivity.class);
 		startActivity(intent);
+		finish();
 	}
 
 	public void CallHome(View view)
@@ -68,5 +67,6 @@ public class QuizGraderActivity extends Activity
 		// Do something in response to button
 		Intent intent = new Intent(this, HomeActivity.class);
 		startActivity(intent);
+		finish();
 	}
 }

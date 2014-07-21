@@ -13,11 +13,13 @@ public class Quiz
 	/* member variables */
 	String quizTitle;
 	private ArrayList<MCQ> mcqList;
-
-	public Quiz(String title)
+	private String webId;
+	
+ 	public Quiz(String title)
 	{
 		this.quizTitle = title;
 		this.mcqList = new ArrayList<MCQ>();
+		this.webId = "";
 	}
 
 	/**
@@ -52,6 +54,23 @@ public class Quiz
 	public void setMcqs(ArrayList<MCQ> mcqs)
 	{
 		this.mcqList = mcqs;
+	}
+
+	/**
+	 * @return the id used to identify the quiz on the web
+	 */
+	public String getWebId()
+	{
+		return webId;
+	}
+	
+
+	/**
+	 * @param webId the id used to identify the quiz on the web
+	 */
+	public void setWebId(String webId)
+	{
+		this.webId = webId;
 	}
 
 	/**

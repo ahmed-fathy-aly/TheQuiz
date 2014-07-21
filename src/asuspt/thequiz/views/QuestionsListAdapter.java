@@ -8,6 +8,7 @@ import android.content.ClipData.Item;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class QuestionsListAdapter extends ArrayAdapter<Item>
 	public void setQuiz(Quiz quiz)
 	{
 		this.quiz = quiz;
+		this.notifyDataSetChanged();
 	}
 
 	@Override
@@ -124,5 +126,31 @@ public class QuestionsListAdapter extends ArrayAdapter<Item>
 	{
 		for (RadioGroup radioGroup : this.radioGroups.values())
 			radioGroup.clearCheck();
+	}
+
+	
+	/**
+	 * @return indices of answers selected or -1 if none is selected
+	 */
+	public ArrayList<Integer> getAnswers()
+	{
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		int nQuestions = quiz.getMcqs().size();
+
+		for (int i = 0; i < nQuestions; i++)
+		{
+			if (radioGroups.containsKey(i))
+			{
+				RadioGroup radioGroup = radioGroups.get(i);
+				int radioButtonID = radioGroup.getCheckedRadioButtonId();
+				View radioButton = radioGroup.findViewById(radioButtonID);
+				int idx = radioGroup.indexOfChild(radioButton);
+				result.add(idx);
+			}
+			else
+				result.add(-1);
+		}
+		
+		return result;
 	}
 }

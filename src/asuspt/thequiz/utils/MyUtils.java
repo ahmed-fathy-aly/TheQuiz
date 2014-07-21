@@ -17,12 +17,14 @@ import asuspt.thequiz.data.StudentInfo;
  */
 public class MyUtils
 {
-	public static final String TOTAL_SCORE = "total score";
-	public static final String MAXIMUM_SCORE = "maximum score";
+	public static final String GRADE = "asuspt grade";
 
 	public static final String PREFERENCES_NAME = "asuspt the quiz preferences";
 	public static final String STUDENT_ID = "student id";
 	public static final String STUDENT_PASSWORD = "student password";
+	public static final String STUDENT_NAME= "student name";
+	
+	public static final String GRADING_FAILED = "asuspt i am a bad web minion";
 	
 	/**** Method for Setting the Height of the ListView dynamically.
 	 **** Hack to fix the issue of not showing all the items of the ListView
@@ -56,10 +58,12 @@ public class MyUtils
 	{
 		SharedPreferences prefs = context.getSharedPreferences(MyUtils.PREFERENCES_NAME, Context.MODE_PRIVATE);
 		Editor editor = prefs.edit();
+		
 		editor.putString(MyUtils.STUDENT_ID, studentInfo.getId());
 		editor.putString(MyUtils.STUDENT_PASSWORD, studentInfo.getPassword());
+		editor.putString(MyUtils.STUDENT_NAME, studentInfo.getName());
+		
 		editor.commit();
-
 	}
 
 	/**
@@ -68,11 +72,14 @@ public class MyUtils
 	public static StudentInfo loadLoginInfoFromPreferences(Context context)
 	{
 		SharedPreferences prefs = context.getSharedPreferences(MyUtils.PREFERENCES_NAME, Context.MODE_PRIVATE);
+		
 		StudentInfo studentInfo = new StudentInfo("", "");
 		if (prefs.contains(MyUtils.STUDENT_ID))
 			studentInfo.setId(prefs.getString(MyUtils.STUDENT_ID, ""));
 		if (prefs.contains(MyUtils.STUDENT_PASSWORD))
 			studentInfo.setPassword(prefs.getString(MyUtils.STUDENT_PASSWORD, ""));
+		if (prefs.contains(MyUtils.STUDENT_NAME))
+			studentInfo.setName(prefs.getString(MyUtils.STUDENT_NAME, ""));
 		return studentInfo;
 	}
 }

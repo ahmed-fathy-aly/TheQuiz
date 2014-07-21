@@ -1,9 +1,14 @@
 package asuspt.thequiz.activities;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,8 +24,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import asuspt.thequiz.R;
 import asuspt.thequiz.data.Quiz;
+import asuspt.thequiz.data.StudentInfo;
 import asuspt.thequiz.utils.MyUtils;
 import asuspt.thequiz.views.QuestionsListAdapter;
+import asuspt.thequiz.web.QuizServer;
 
 /**
  * The activity that displays and lets user answer a quiz
@@ -43,7 +50,6 @@ public class QuizActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz);
 		loadQuiz();
-		setGui();
 	}
 
 	/**
@@ -51,11 +57,17 @@ public class QuizActivity extends Activity
 	 */
 	private void loadQuiz()
 	{
-		this.quiz = Quiz.generateTemplateQuiz("My Quiz", 10, 4);
+		boolean fathyDidTheWebStuff = true;
+		if (!fathyDidTheWebStuff)
+			this.quiz = Quiz.generateTemplateQuiz("My Quiz", 10, 4);
+		else
+		{
+			new QuizLoaderTask().execute();
+		}
 	}
 
 	/**
-	 * sets up the gui elements
+	 * sets up the gui elements called after the quiz is loaded
 	 */
 	private void setGui()
 	{
@@ -134,21 +146,100 @@ public class QuizActivity extends Activity
 	 */
 	protected void onSubmitButtonClicked()
 	{
-		try
-		{
-			// calculate score
-			int score = questionsListAdapter.getScore();
+		new QuizGraderTask().execute();
 
-			// start the grader activity
-			Intent intent = new Intent(getBaseContext(), QuizGraderActivity.class);
-			intent.putExtra(MyUtils.TOTAL_SCORE, score);
-			intent.putExtra(MyUtils.MAXIMUM_SCORE, quiz.getMcqs().size());
-			startActivity(intent);
-			finish();
-		} catch (Exception e)
+	}
+
+	/**
+	 * loads the quiz and stores it in this.quiz then sets up the gui elements
+	 */
+	class QuizLoaderTask extends AsyncTask<Void, Void, Quiz>
+	{
+		private ProgressDialog progressDialog;
+
+		protected void onPreExecute()
 		{
+			// make a progress dialog
+			progressDialog = ProgressDialog.show(QuizActivity.this, "Loading", "downloading quiz");
+		}
+
+		protected Quiz doInBackground(Void... params)
+		{
+			// wait as if it'll take time to connect to server
+			try
+			{
+				synchronized (this)
+				{
+					wait(1000);
+				}
+			} catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+
+			// ask web minions to load the quiz
+			StudentInfo studentInfo = MyUtils.loadLoginInfoFromPreferences(getApplicationContext());
+			return QuizServer.loadQuiz(studentInfo);
+		}
+
+		protected void onPostExecute(Quiz result)
+		{
+			// check the result is valid
+			if (result != null)
+			{
+				quiz = result;
+			} else
+			{
+				Toast.makeText(getApplicationContext(), "Failed to load the quiz",
+						Toast.LENGTH_SHORT).show();
+				quiz = new Quiz("Failed Quiz");
+			}
+
+			// set GUI of the activity
+			setGui();
+			progressDialog.dismiss();
+
 		}
 
 	}
 
+	class QuizGraderTask extends AsyncTask<Void, Void, String>
+	{
+		private ProgressDialog progressDialog;
+
+		protected void onPreExecute()
+		{
+			// make a progress dialog
+			progressDialog = ProgressDialog.show(QuizActivity.this, "Grading", "grading quiz");
+		}
+
+		@Override
+		protected String doInBackground(Void... params)
+		{
+			// ask web minions to grade the quiz
+			StudentInfo studentInfo = MyUtils.loadLoginInfoFromPreferences(getApplicationContext());
+			ArrayList<Integer> choices = questionsListAdapter.getAnswers();
+			return QuizServer.gradeQuiz(quiz, choices, studentInfo);
+		}
+
+		@Override
+		protected void onPostExecute(String result)
+		{
+			progressDialog.dismiss();
+
+			// if graded successfully then go to the grader activity
+			if (result.equals(MyUtils.GRADING_FAILED))
+			{
+				Toast.makeText(getApplicationContext(), "Oops...couldn't submit",
+						Toast.LENGTH_SHORT).show();
+			} else
+			{
+				// start the grader activity
+				Intent intent = new Intent(getBaseContext(), QuizGraderActivity.class);
+				intent.putExtra(MyUtils.GRADE, result);
+				startActivity(intent);
+				finish();
+			}
+		}
+	}
 }

@@ -5,11 +5,20 @@ public class StudentInfo
 	/* member variables */
 	private String id;
 	private String password;
+	private String name;
 	
 	public StudentInfo(String id, String password)
 	{
 		this.id = id;
 		this.password = password;
+		this.name = "";
+	}
+
+	public StudentInfo(String id, String password, String name)
+	{
+		this.id = id;
+		this.password = password;
+		this.name = name;
 	}
 
 	public String getId()
@@ -30,6 +39,16 @@ public class StudentInfo
 	public void setPassword(String password)
 	{
 		this.password = password;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
 	}
 	
 	

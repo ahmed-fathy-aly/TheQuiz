@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import asuspt.thequiz.R;
+import asuspt.thequiz.data.StudentInfo;
+import asuspt.thequiz.utils.MyUtils;
 import asuspt.thequiz.web.LoginRegisterServer;
 
 public class RegisterActivity extends Activity
@@ -26,10 +28,9 @@ public class RegisterActivity extends Activity
 	{
 		setContentView(R.layout.activity_register);
 		super.onCreate(savedInstanceState);
-		
+
 		setGui();
 	}
-
 
 	/**
 	 * sets gui elements
@@ -42,7 +43,7 @@ public class RegisterActivity extends Activity
 		editTextpasswwordRepeat = (EditText) findViewById(R.id.editTextPasswordRepeat);
 		editTextName = (EditText) findViewById(R.id.editTextName);
 		buttonRegister = (Button) findViewById(R.id.buttonRegister);
-		
+
 		// add listeners
 		buttonRegister.setOnClickListener(new OnClickListener()
 		{
@@ -51,9 +52,8 @@ public class RegisterActivity extends Activity
 				onButtonRegisterClicked();
 			}
 		});
-		
-	}
 
+	}
 
 	/**
 	 * asks the server to register with the account info
@@ -63,13 +63,13 @@ public class RegisterActivity extends Activity
 		// Checks that the password and its repeat are the same
 		String password = editTextPassword.getText().toString();
 		String passwordRepeat = editTextpasswwordRepeat.getText().toString();
-		if (! password.equals(passwordRepeat))
+		if (!password.equals(passwordRepeat))
 		{
 			Toast.makeText(this, "The password doesn't match", Toast.LENGTH_LONG).show();
 			editTextpasswwordRepeat.requestFocus();
 			return;
 		}
-		
+
 		// ask the server to register this
 		new AsyncTask<Integer, Integer, Boolean>()
 		{
@@ -100,7 +100,7 @@ public class RegisterActivity extends Activity
 				String id = editTextId.getText().toString();
 				String password = editTextPassword.getText().toString();
 				String name = editTextName.getText().toString();
-				
+
 				return LoginRegisterServer.registerAccount(id, password, name);
 			}
 
@@ -114,22 +114,25 @@ public class RegisterActivity extends Activity
 				{
 					String id = editTextId.getText().toString();
 					String password = editTextPassword.getText().toString();
-					Toast.makeText(RegisterActivity.this, "Registered succesfully", Toast.LENGTH_SHORT)
-							.show();
-					Toast.makeText(RegisterActivity.this, "ID : " + id + "\nPassword : " + password, Toast.LENGTH_LONG)
-					.show();
-			
+					String name = editTextName.getText().toString();
+					Toast.makeText(RegisterActivity.this, "Registered succesfully",
+							Toast.LENGTH_SHORT).show();
+					Toast.makeText(RegisterActivity.this,
+							"ID : " + id + "\nPassword : " + password, Toast.LENGTH_LONG).show();
+					MyUtils.saveLoginInfoInPreferences(new StudentInfo(id, password, name),
+							getApplicationContext());
 
 					Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
 					startActivity(intent);
+					finish();
 				} else
 				{
-					Toast.makeText(RegisterActivity.this, "Couldn't register",
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(RegisterActivity.this, "Couldn't register", Toast.LENGTH_LONG)
+							.show();
 				}
 			}
 		}.execute(0);
-	
+
 	}
 
 }

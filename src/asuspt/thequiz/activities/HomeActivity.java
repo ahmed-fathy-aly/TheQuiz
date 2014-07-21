@@ -31,6 +31,7 @@ public class HomeActivity extends Activity
 		// start quiz activity
 		Intent intent = new Intent(this, QuizActivity.class);
 		startActivity(intent);
+		finish();
 	}
 
 }

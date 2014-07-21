@@ -82,7 +82,7 @@ public class LoginActivity extends Activity
 				{
 					synchronized (this)
 					{
-						wait(3000);
+						wait(1000);
 					}
 				} catch (InterruptedException e)
 				{
@@ -111,10 +111,12 @@ public class LoginActivity extends Activity
 					// get the id and password
 					String id = editTextId.getText().toString();
 					String password = editTextPassword.getText().toString();
-					MyUtils.saveLoginInfoInPreferences(new StudentInfo(id, password), getApplicationContext());
+					MyUtils.saveLoginInfoInPreferences(new StudentInfo(id, password),
+							getApplicationContext());
 
 					Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
 					startActivity(intent);
+					finish();
 				} else
 				{
 					Toast.makeText(LoginActivity.this, "Wrong Id or/and Password",
@@ -124,12 +126,10 @@ public class LoginActivity extends Activity
 		}.execute(0);
 	}
 
-
-
 	private void loadLoginInfoFromPreferences()
 	{
 		StudentInfo studentInfo = MyUtils.loadLoginInfoFromPreferences(getApplicationContext());
-			editTextId.setText(studentInfo.getId());
-			editTextPassword.setText(studentInfo.getPassword());
+		editTextId.setText(studentInfo.getId());
+		editTextPassword.setText(studentInfo.getPassword());
 	}
 }
