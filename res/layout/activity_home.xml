@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/asuspt.thequiz"
     android:id="@+id/db1_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_vertical_margin"
     android:orientation="vertical" >
 
     <TextView
@@ -15,21 +17,54 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#2186AD" />
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dip"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:gravity="center|bottom"
+        android:background="@drawable/shape_rounded_rectangle_filled"
+        android:gravity="center"
         android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="145dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center"
-            android:onClick="startQuiz"
-            android:text="Start Quiz" />
+        <android.support.v7.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:columnCount="2"
+            app:rowCount="1" 
+            app:orientation="horizontal"
+            app:alignmentMode="alignMargins">
+
+            <LinearLayout
+                app:layout_column="0"
+                app:layout_gravity="fill_horizontal"
+                app:layout_row="0"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/buttonProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_button_round"
+                    android:text="Profile"
+                    android:onClick="startProfileActivity" />
+            </LinearLayout>
+
+            <LinearLayout
+                app:layout_column="1"
+                app:layout_row="0"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/buttonQuiz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_button_round"
+                    android:text="Quiz"
+                    android:onClick="startQuizActivity" />
+            </LinearLayout>
+
+ 
+
+        </android.support.v7.widget.GridLayout>
     </LinearLayout>
 
 </LinearLayout>
