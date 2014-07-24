@@ -15,7 +15,7 @@
         android:gravity="center"
         android:text="Welcome"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#2186AD" />
+        android:textColor="#679de7" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,24 +28,28 @@
         <android.support.v7.widget.GridLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:columnCount="2"
-            app:rowCount="1" 
+            app:alignmentMode="alignMargins"
             app:orientation="horizontal"
-            app:alignmentMode="alignMargins">
+            app:rowCount="1" >
 
             <LinearLayout
                 app:layout_column="0"
-                app:layout_gravity="fill_horizontal"
                 app:layout_row="0"
                 android:orientation="vertical" >
 
-                <Button
-                    android:id="@+id/buttonProfile"
+                <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/selector_button_round"
-                    android:text="Profile"
-                    android:onClick="startProfileActivity" />
+                    android:background="@drawable/selector_button_transparent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/icon_profile" 
+                    android:onClick="startProfileActivity"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Profile" />
             </LinearLayout>
 
             <LinearLayout
@@ -53,17 +57,20 @@
                 app:layout_row="0"
                 android:orientation="vertical" >
 
-                <Button
-                    android:id="@+id/buttonQuiz"
+                <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/selector_button_round"
-                    android:text="Quiz"
+                    android:background="@drawable/selector_button_transparent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/icon_qurstion"
                     android:onClick="startQuizActivity" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Take Quiz" />
             </LinearLayout>
-
- 
-
         </android.support.v7.widget.GridLayout>
     </LinearLayout>
 

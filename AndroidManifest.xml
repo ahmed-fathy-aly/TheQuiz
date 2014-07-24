@@ -15,10 +15,10 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="asuspt.thequiz.activities.LoginOrRegister"
-            android:label="Home" >
+            android:label="The Quiz" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <!-- add   <category android:name="android.intent.category.LAUNCHER" /> here to make it the main activity -->
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -27,7 +27,6 @@
             android:label="Home" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <!-- add   <category android:name="android.intent.category.LAUNCHER" /> here to make it the main activity -->
             </intent-filter>
         </activity>
         <activity
@@ -35,7 +34,6 @@
             android:label="Home" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <!-- add   <category android:name="android.intent.category.LAUNCHER" /> here to make it the main activity -->
             </intent-filter>
         </activity>
         <activity
@@ -43,7 +41,6 @@
             android:label="Home" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <!-- add   <category android:name="android.intent.category.LAUNCHER" /> here to make it the main activity -->
             </intent-filter>
         </activity>
         <activity
@@ -51,7 +48,6 @@
             android:label="Quiz" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <!-- add   <category android:name="android.intent.category.LAUNCHER" /> here to make it the main activity -->
             </intent-filter>
         </activity>
         <activity
@@ -59,8 +55,15 @@
             android:label="Grade" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <!-- add   <category android:name="android.intent.category.LAUNCHER" /> here to make it the main activity -->
             </intent-filter>
+        </activity>
+        <activity
+            android:name="asuspt.thequiz.activities.ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:parentActivityName="asuspt.thequiz.activities.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="asuspt.thequiz.activities.HomeActivity" />
         </activity>
     </application>
 

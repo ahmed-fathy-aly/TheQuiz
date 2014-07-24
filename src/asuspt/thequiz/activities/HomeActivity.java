@@ -1,11 +1,11 @@
 package asuspt.thequiz.activities;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.GridLayout;
 import asuspt.thequiz.R;
 
 /**
@@ -37,7 +37,10 @@ public class HomeActivity extends Activity
 	 */
 	public void startProfileActivity(View v)
 	{
-		// TODO start profile activity
+		Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+		startActivity(intent);
 	}
+
+
 
 }

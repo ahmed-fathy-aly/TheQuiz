@@ -230,50 +230,53 @@ containing a value of this type.
         public static final int button_clear=0x7f020000;
         public static final int button_submit=0x7f020001;
         public static final int ic_launcher=0x7f020002;
-        public static final int selector_background=0x7f020003;
-        public static final int selector_button_round=0x7f020004;
-        public static final int shape_button_clicked=0x7f020005;
-        public static final int shape_button_normal=0x7f020006;
-        public static final int shape_gradient=0x7f020007;
-        public static final int shape_gradient_reversed=0x7f020008;
-        public static final int shape_round_button_clicked=0x7f020009;
-        public static final int shape_round_button_normal=0x7f02000a;
-        public static final int shape_rounded_rectangle=0x7f02000b;
-        public static final int shape_rounded_rectangle_filled=0x7f02000c;
+        public static final int icon_profile=0x7f020003;
+        public static final int icon_qurstion=0x7f020004;
+        public static final int selector_background=0x7f020005;
+        public static final int selector_button_round=0x7f020006;
+        public static final int selector_button_transparent=0x7f020007;
+        public static final int shape_button_clicked=0x7f020008;
+        public static final int shape_button_normal=0x7f020009;
+        public static final int shape_button_transparent_clicked=0x7f02000a;
+        public static final int shape_button_transparent_normal=0x7f02000b;
+        public static final int shape_gradient=0x7f02000c;
+        public static final int shape_gradient_reversed=0x7f02000d;
+        public static final int shape_round_button_clicked=0x7f02000e;
+        public static final int shape_round_button_normal=0x7f02000f;
+        public static final int shape_rounded_rectangle=0x7f020010;
+        public static final int shape_rounded_rectangle_filled=0x7f020011;
     }
     public static final class id {
-        public static final int action_settings=0x7f050021;
+        public static final int action_settings=0x7f05001f;
         public static final int alignBounds=0x7f050002;
         public static final int alignMargins=0x7f050003;
         public static final int bottom=0x7f050005;
-        public static final int button1=0x7f05001b;
-        public static final int button2=0x7f05001c;
-        public static final int buttonLogin=0x7f050018;
-        public static final int buttonProfile=0x7f050014;
-        public static final int buttonQuiz=0x7f050015;
-        public static final int buttonRegister=0x7f050020;
+        public static final int button1=0x7f050019;
+        public static final int button2=0x7f05001a;
+        public static final int buttonLogin=0x7f050016;
+        public static final int buttonRegister=0x7f05001e;
         public static final int center=0x7f05000c;
         public static final int center_horizontal=0x7f05000a;
         public static final int center_vertical=0x7f050008;
         public static final int clip_horizontal=0x7f05000f;
         public static final int clip_vertical=0x7f05000e;
         public static final int db1_root=0x7f050012;
-        public static final int editTextID=0x7f05001d;
-        public static final int editTextId=0x7f050016;
-        public static final int editTextName=0x7f05001f;
-        public static final int editTextPassword=0x7f050017;
-        public static final int editTextPasswordRepeat=0x7f05001e;
+        public static final int editTextID=0x7f05001b;
+        public static final int editTextId=0x7f050014;
+        public static final int editTextName=0x7f05001d;
+        public static final int editTextPassword=0x7f050015;
+        public static final int editTextPasswordRepeat=0x7f05001c;
         public static final int end=0x7f050011;
         public static final int fill=0x7f05000d;
         public static final int fill_horizontal=0x7f05000b;
         public static final int fill_vertical=0x7f050009;
         public static final int horizontal=0x7f050000;
         public static final int left=0x7f050006;
-        public static final int questionsList=0x7f050019;
+        public static final int questionsList=0x7f050017;
         public static final int right=0x7f050007;
         public static final int start=0x7f050010;
         public static final int textView1=0x7f050013;
-        public static final int textViewGrade=0x7f05001a;
+        public static final int textViewGrade=0x7f050018;
         public static final int top=0x7f050004;
         public static final int vertical=0x7f050001;
     }
@@ -281,17 +284,20 @@ containing a value of this type.
         public static final int activity_home=0x7f030000;
         public static final int activity_login=0x7f030001;
         public static final int activity_login_or_register=0x7f030002;
-        public static final int activity_quiz=0x7f030003;
-        public static final int activity_quiz_grader=0x7f030004;
-        public static final int activity_register=0x7f030005;
+        public static final int activity_profile=0x7f030003;
+        public static final int activity_quiz=0x7f030004;
+        public static final int activity_quiz_grader=0x7f030005;
+        public static final int activity_register=0x7f030006;
     }
     public static final class menu {
         public static final int home=0x7f090000;
+        public static final int profile=0x7f090001;
     }
     public static final class string {
         public static final int action_settings=0x7f070001;
         public static final int app_name=0x7f070000;
         public static final int hello_world=0x7f070002;
+        public static final int title_activity_profile=0x7f070003;
     }
     public static final class style {
         /** 

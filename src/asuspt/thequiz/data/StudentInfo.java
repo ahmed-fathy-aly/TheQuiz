@@ -6,7 +6,8 @@ public class StudentInfo
 	private String id;
 	private String password;
 	private String name;
-	
+	private String quizResults;
+
 	public StudentInfo(String id, String password)
 	{
 		this.id = id;
@@ -50,7 +51,16 @@ public class StudentInfo
 	{
 		this.name = name;
 	}
+
+	public String getQuizResults()
+	{
+		return quizResults;
+	}
+
 	
-	
+	public void setQuizResults(String quizResults)
+	{
+		this.quizResults = quizResults;
+	}
 
 }

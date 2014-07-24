@@ -1,5 +1,7 @@
 package asuspt.thequiz.web;
 
+import asuspt.thequiz.data.StudentInfo;
+
 
 public class LoginRegisterServer
 {
@@ -29,5 +31,17 @@ public class LoginRegisterServer
 			return false;
 		else
 			return true;
+	}
+
+	/**
+	 * @param studentInfo contains only the id and the password
+	 * @return StudentInfo object containing name, quiz results and same id and password
+	 */
+	public static StudentInfo getCompleteStudentInfo(StudentInfo studentInfo)
+	{
+		StudentInfo result = new StudentInfo("619", "fsad");
+		result.setName("Rey mysterio");
+		result.setQuizResults("Quiz 1 : 5 / 12\nQuiz 2 : 5 1 / 12");
+		return result;
 	}
 }
