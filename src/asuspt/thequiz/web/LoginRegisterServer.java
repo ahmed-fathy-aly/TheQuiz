@@ -11,9 +11,11 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.util.Log;
+import asuspt.thequiz.data.MCQ;
 import asuspt.thequiz.data.Quiz;
 import asuspt.thequiz.data.StudentInfo;
 
@@ -109,23 +111,41 @@ public class LoginRegisterServer
 		// make a method
 		// that returns a list of quizzes names and a tag so i can make a list
 		// where the user chooses the quiz, it'll be great
-		String urlString = "http://quiz-creator.herokuapp.com/quizzes/json" + quizId;
-		try
-		{
-			HttpGet get = new HttpGet(urlString);
-			HttpResponse response = client.execute(get);
-			HttpEntity resEntity = response.getEntity();
-			final String response_str = EntityUtils.toString(resEntity);
-			if (resEntity != null)
-			{
-				Log.i("RESPONSE", response_str);
-				JSONObject res = new JSONObject(response_str);
-				// return res.getBoolean("successful");
-			}
-		} catch (Exception ex)
-		{
-			Log.e("Debug", "error: " + ex.getMessage(), ex);
-		}
+		String urlString = "http://quiz-creator.herokuapp.com/quizzes/json/" + quizId;
+	    try
+	    {
+	    	Log.e("RESPONSE",urlString);
+	        HttpGet get = new HttpGet(urlString);
+	        HttpResponse response = client.execute(get);
+	        HttpEntity resEntity = response.getEntity();
+	        final String response_str = EntityUtils.toString(resEntity);
+	        if (resEntity != null) {
+	            Log.i("RESPONSE",response_str);
+	            JSONObject res = new JSONObject(response_str);
+	            Quiz quiz = new Quiz(res.getString("title"));
+	            quiz.setWebId(quizId);
+	            JSONObject questions = res.getJSONObject("questions");
+	            int len = questions.length();
+	            for (int i = 0; i < len; i++) {
+	            	String str = String.valueOf(i);
+	            	JSONObject question = questions.getJSONObject(str);
+	            	MCQ mcq = new MCQ();
+	            	mcq.setQuestion("Question no." + str + " " + question.getString("body"));
+	            	for (int j = 1; j <= 5; j++ ) {
+	            		str = String.valueOf(j);
+	            		if (question.has("choice_" + str))
+	            			mcq.addAnswer("Answer no." + str + " " + question.getString("choice_" + str));
+	            		else
+	            			break;
+	            	}
+	            	quiz.addMcq(mcq);
+	            }
+	            return quiz;
+	        }
+	    }
+	    catch (Exception ex){
+	        Log.e("Debug", "error: " + ex.getMessage(), ex);
+	    }
 
 		return Quiz.generateTemplateQuiz("Downloaded quiz", 5, 4);
 	}

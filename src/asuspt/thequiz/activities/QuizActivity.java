@@ -51,7 +51,7 @@ public class QuizActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz);
-		String quizString = getIntent().getExtras().getString(MyUtils.QUIZ_ID);
+		quizId = getIntent().getExtras().getString(MyUtils.QUIZ_ID);
 		loadQuiz();
 	}
 
