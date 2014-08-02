@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.StringBody;
@@ -108,6 +109,22 @@ public class LoginRegisterServer
 		// make a method
 		// that returns a list of quizzes names and a tag so i can make a list
 		// where the user chooses the quiz, it'll be great
+		String urlString = "http://quiz-creator.herokuapp.com/quizzes/json" + quizId;
+	    try
+	    {
+	        HttpGet get = new HttpGet(urlString);
+	        HttpResponse response = client.execute(get);
+	        HttpEntity resEntity = response.getEntity();
+	        final String response_str = EntityUtils.toString(resEntity);
+	        if (resEntity != null) {
+	            Log.i("RESPONSE",response_str);
+	            JSONObject res = new JSONObject(response_str);
+	            //return res.getBoolean("successful");
+	        }
+	    }
+	    catch (Exception ex){
+	        Log.e("Debug", "error: " + ex.getMessage(), ex);
+	    }
 
 		return Quiz.generateTemplateQuiz("Downloaded quiz", 5, 4);
 	}
