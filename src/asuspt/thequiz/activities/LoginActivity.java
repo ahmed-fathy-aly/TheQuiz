@@ -77,7 +77,6 @@ public class LoginActivity extends Activity
 
 			protected Boolean doInBackground(Integer... params)
 			{
-<<<<<<< HEAD
 				/*
 				// wait as if it'll take time to connect to server
 				try
@@ -91,10 +90,8 @@ public class LoginActivity extends Activity
 					e.printStackTrace();
 				}
 				*/
-=======
 
 
->>>>>>> 875166ff0b63e48ac07b0a3a7b00d2d1417f4220
 				// get the id and password
 				String id = editTextId.getText().toString();
 				String password = editTextPassword.getText().toString();

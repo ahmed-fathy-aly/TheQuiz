@@ -1,5 +1,7 @@
 package asuspt.thequiz.web;
 
+import java.util.ArrayList;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -11,6 +13,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import android.util.Log;
+import asuspt.thequiz.data.Quiz;
 import asuspt.thequiz.data.StudentInfo;
 
 public class LoginRegisterServer
@@ -23,23 +26,13 @@ public class LoginRegisterServer
 	 */
 	public static boolean isCorrectIdAndPassword(String id, String password)
 	{
-<<<<<<< HEAD
 		// TODO @fathy 2otta do your web stuff here 
 
-
+		// @fathy 2otta : eb2a dos ctrl-shift-f lama t5ls 
 		 String urlString = "http://quiz-creator.herokuapp.com/users/api_login";
 		    try
 		    {
 		        HttpPost post = new HttpPost(urlString);
-=======
->>>>>>> 875166ff0b63e48ac07b0a3a7b00d2d1417f4220
-
-		// @fathy 2otta : eb2a dos ctrl-shift-f lama t5ls 
-		String urlString = "http://quiz-creator.herokuapp.com/users/api_login";
-		try
-		{
-			HttpClient client = new DefaultHttpClient();
-			HttpPost post = new HttpPost(urlString);
 
 			MultipartEntity reqEntity = new MultipartEntity();
 			reqEntity.addPart("data[User][username]", new StringBody(id));
@@ -85,6 +78,9 @@ public class LoginRegisterServer
 	        MultipartEntity reqEntity = new MultipartEntity();
 	        reqEntity.addPart("data[User][username]", new StringBody(id));
 	        reqEntity.addPart("data[User][password]", new StringBody(password));
+	        reqEntity.addPart("data[User][name]", new StringBody(name));
+	        reqEntity.addPart("data[User][email]", new StringBody(email));
+	        reqEntity.addPart("data[User][department]", new StringBody(department));
 	        post.setEntity(reqEntity);
 	        HttpResponse response = client.execute(post);
 	        HttpEntity resEntity = response.getEntity();
@@ -101,7 +97,38 @@ public class LoginRegisterServer
 
 	    return false;
 	}
+	
+	
+	/**
+	 * @return a single quiz
+	 */
+	public static Quiz loadQuiz(String quizId)
+	{
+		// TODO @fathy 2otta : add web stuff here....if you can ignore this and
+		// make a method
+		// that returns a list of quizzes names and a tag so i can make a list
+		// where the user chooses the quiz, it'll be great
 
+		return Quiz.generateTemplateQuiz("Downloaded quiz", 5, 4);
+	}
+
+	/**
+	 * @param studentInfo
+	 * @param quiz
+	 * @return MyUtils.GRADING_FAILED if you failed to grade the quiz or the
+	 *         quiz result if you could
+	 * @param answers
+	 *            the indices of selected answers or -1 if none is selected
+	 * @return
+	 */
+	public static String gradeQuiz(Quiz quiz, ArrayList<Integer> answers,
+			StudentInfo loadLoginInfoFromPreferences)
+	{
+		return "4.0 / 13";
+
+	}
+	
+	
 	/**
 	 * @param studentInfo
 	 *            contains only the id and the password

@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:ems="10"
-                android:hint="ID"
+                android:hint="Username"
                 android:inputType="text"
                 android:textColor="#ccffffff"
                 android:textColorHint="#88ffffff" />

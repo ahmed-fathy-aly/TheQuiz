@@ -27,6 +27,7 @@ import asuspt.thequiz.data.Quiz;
 import asuspt.thequiz.data.StudentInfo;
 import asuspt.thequiz.utils.MyUtils;
 import asuspt.thequiz.views.QuestionsListAdapter;
+import asuspt.thequiz.web.LoginRegisterServer;
 import asuspt.thequiz.web.QuizServer;
 
 /**
@@ -179,7 +180,7 @@ public class QuizActivity extends Activity
 
 			// ask web minions to load the quiz
 			StudentInfo studentInfo = MyUtils.loadLoginInfoFromPreferences(getApplicationContext());
-			return QuizServer.loadQuiz(studentInfo);
+			return LoginRegisterServer.loadQuiz("secret-id");
 		}
 
 		protected void onPostExecute(Quiz result)
@@ -219,7 +220,7 @@ public class QuizActivity extends Activity
 			// ask web minions to grade the quiz
 			StudentInfo studentInfo = MyUtils.loadLoginInfoFromPreferences(getApplicationContext());
 			ArrayList<Integer> choices = questionsListAdapter.getAnswers();
-			return QuizServer.gradeQuiz(quiz, choices, studentInfo);
+			return LoginRegisterServer.gradeQuiz(quiz, choices, studentInfo);
 		}
 
 		@Override
