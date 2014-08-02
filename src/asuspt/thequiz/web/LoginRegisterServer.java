@@ -211,17 +211,26 @@ public class LoginRegisterServer
 			{
 				Log.i("RESPONSE", response_str);
 				JSONObject res = new JSONObject(response_str);
-				
+				StudentInfo result = new StudentInfo(studentInfo.getId(), studentInfo.getPassword());
+				result.setQuizResults(res.getString("quiz_results"));
+				result.setDepartment(res.getString("department"));
+				result.setEmail(res.getString("email"));
+				return result;
 			}
 		} catch (Exception ex)
 		{
 			Log.e("Debug", "error: " + ex.getMessage(), ex);
 		}
+		/*
+		StudentInfo result = new StudentInfo("619", "fsad");
 		result.setName("Rey mysterio");
 		result.setQuizResults("Quiz 1 : 5 / 12\nQuiz 2 : 5 1 / 12");
 		result.setDepartment("Sorcery");
 		result.setEmail("AnaAslnCrazy@gmail.com");
 		return result;
+		*/
+		// @master: Return here if Failed.
+		return studentInfo;
 	}
 
 	public static Boolean isCorrectQuizId(String id, StudentInfo loadLoginInfoFromPreferences)
