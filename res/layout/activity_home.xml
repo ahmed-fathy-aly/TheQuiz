@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/selector_button_transparent"
                     android:scaleType="fitXY"
-                    android:src="@drawable/icon_profile" 
+                    android:src="@drawable/icon_profile"
                     android:onClick="startProfileActivity"/>
 
                 <TextView

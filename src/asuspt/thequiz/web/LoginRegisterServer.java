@@ -17,6 +17,8 @@ import asuspt.thequiz.data.StudentInfo;
 public class LoginRegisterServer
 {
 
+	static HttpClient client = new DefaultHttpClient();
+	
 	/**
 	 * @return true if the id is registered and the password is correct
 	 */
@@ -28,7 +30,6 @@ public class LoginRegisterServer
 		 String urlString = "http://quiz-creator.herokuapp.com/users/api_login";
 		    try
 		    {
-		        HttpClient client = new DefaultHttpClient();
 		        HttpPost post = new HttpPost(urlString);
 
 		        MultipartEntity reqEntity = new MultipartEntity();
@@ -64,10 +65,29 @@ public class LoginRegisterServer
 	 */
 	public static Boolean registerAccount(String id, String password, String name)
 	{
-		if (id.equals("nope"))
-			return false;
-		else
-			return true;
+		String urlString = "http://quiz-creator.herokuapp.com/users/api_register";
+	    try
+	    {
+	        HttpPost post = new HttpPost(urlString);
+
+	        MultipartEntity reqEntity = new MultipartEntity();
+	        reqEntity.addPart("data[User][username]", new StringBody(id));
+	        reqEntity.addPart("data[User][password]", new StringBody(password));
+	        post.setEntity(reqEntity);
+	        HttpResponse response = client.execute(post);
+	        HttpEntity resEntity = response.getEntity();
+	        final String response_str = EntityUtils.toString(resEntity);
+	        if (resEntity != null) {
+	            Log.i("RESPONSE",response_str);
+	            JSONObject res = new JSONObject(response_str);
+	            return res.getBoolean("successful");
+	        }
+	    }
+	    catch (Exception ex){
+	        Log.e("Debug", "error: " + ex.getMessage(), ex);
+	    }
+	
+	    return false;
 	}
 
 	/**
