@@ -18,6 +18,7 @@ import android.util.Log;
 import asuspt.thequiz.data.MCQ;
 import asuspt.thequiz.data.Quiz;
 import asuspt.thequiz.data.StudentInfo;
+import asuspt.thequiz.utils.MyUtils;
 
 public class LoginRegisterServer
 {
@@ -127,14 +128,12 @@ public class LoginRegisterServer
 	            JSONObject questions = res.getJSONObject("questions");
 	            int len = questions.length();
 	            for (int i = 0; i < len; i++) {
-	            	String str = String.valueOf(i);
-	            	JSONObject question = questions.getJSONObject(str);
+	            	JSONObject question = questions.getJSONObject(String.valueOf(i));
 	            	MCQ mcq = new MCQ();
-	            	mcq.setQuestion("Question no." + str + " " + question.getString("body"));
+	            	mcq.setQuestion("Question no." + (i+1)  + " " + question.getString("body"));
 	            	for (int j = 1; j <= 5; j++ ) {
-	            		str = String.valueOf(j);
-	            		if (question.has("choice_" + str))
-	            			mcq.addAnswer("Answer no." + str + " " + question.getString("choice_" + str));
+	            		if (question.has("choice_" + j))
+	            			mcq.addAnswer("Answer no." + (j) + " " + question.getString("choice_" + j));
 	            		else
 	            			break;
 	            	}
@@ -146,8 +145,7 @@ public class LoginRegisterServer
 	    catch (Exception ex){
 	        Log.e("Debug", "error: " + ex.getMessage(), ex);
 	    }
-
-		return Quiz.generateTemplateQuiz("Downloaded quiz", 5, 4);
+	    return new Quiz("failed");
 	}
 
 	/**
@@ -159,10 +157,37 @@ public class LoginRegisterServer
 	 *            the indices of selected answers or -1 if none is selected
 	 * @return
 	 */
-	public static String gradeQuiz(Quiz quiz, ArrayList<Integer> answers,
-			StudentInfo loadLoginInfoFromPreferences)
+	public static String gradeQuiz(String quiz_id, ArrayList<Integer> answers)
 	{
-		return "4.0 / 13";
+		
+		String urlString = "http://quiz-creator.herokuapp.com/quizzes/api_submit";
+		try
+		{
+			HttpPost post = new HttpPost(urlString);
+			JSONArray json_answers = new JSONArray(answers);
+			MultipartEntity reqEntity = new MultipartEntity();
+			reqEntity.addPart("data[Answers]",new StringBody(json_answers.toString()));
+			reqEntity.addPart("data[quiz_id]",new StringBody(quiz_id));
+			Log.i("RESPINSE","1");
+			post.setEntity(reqEntity);
+			Log.i("RESPINSE","2");
+			HttpResponse response = client.execute(post);
+			Log.i("RESPINSE","3");
+			HttpEntity resEntity = response.getEntity();
+			Log.i("RESPINSE","4");
+			final String response_str = EntityUtils.toString(resEntity);
+			if (resEntity != null)
+			{
+				Log.i("RESPONSE", response_str);
+				return response_str;
+			}
+		} catch (Exception ex)
+		{
+			Log.e("Debug", "error: " + ex.getMessage(), ex);
+		}
+		
+		
+		return MyUtils.GRADING_FAILED;
 
 	}
 

@@ -169,6 +169,7 @@ public class QuizActivity extends Activity
 		protected Quiz doInBackground(Void... params)
 		{
 			// wait as if it'll take time to connect to server
+			/*
 			try
 			{
 				synchronized (this)
@@ -179,7 +180,7 @@ public class QuizActivity extends Activity
 			{
 				e.printStackTrace();
 			}
-
+			*/
 			// ask web minions to load the quiz
 			StudentInfo studentInfo = MyUtils.loadLoginInfoFromPreferences(getApplicationContext());
 			return LoginRegisterServer.loadQuiz(quizId);
@@ -223,9 +224,8 @@ public class QuizActivity extends Activity
 		protected String doInBackground(Void... params)
 		{
 			// ask web minions to grade the quiz
-			StudentInfo studentInfo = MyUtils.loadLoginInfoFromPreferences(getApplicationContext());
 			ArrayList<Integer> choices = questionsListAdapter.getAnswers();
-			return LoginRegisterServer.gradeQuiz(quiz, choices, studentInfo);
+			return LoginRegisterServer.gradeQuiz(quiz.getWebId(), choices);
 		}
 
 		@Override
