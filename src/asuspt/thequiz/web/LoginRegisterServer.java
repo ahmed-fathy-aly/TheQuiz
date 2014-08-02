@@ -27,13 +27,13 @@ public class LoginRegisterServer
 	 */
 	public static boolean isCorrectIdAndPassword(String id, String password)
 	{
-		// TODO @fathy 2otta do your web stuff here 
+		// TODO @fathy 2otta do your web stuff here
 
-		// @fathy 2otta : eb2a dos ctrl-shift-f lama t5ls 
-		 String urlString = "http://quiz-creator.herokuapp.com/users/api_login";
-		    try
-		    {
-		        HttpPost post = new HttpPost(urlString);
+		// @fathy 2otta : eb2a dos ctrl-shift-f lama t5ls
+		String urlString = "http://quiz-creator.herokuapp.com/users/api_login";
+		try
+		{
+			HttpPost post = new HttpPost(urlString);
 
 			MultipartEntity reqEntity = new MultipartEntity();
 			reqEntity.addPart("data[User][username]", new StringBody(id));
@@ -72,34 +72,34 @@ public class LoginRegisterServer
 			String department)
 	{
 		String urlString = "http://quiz-creator.herokuapp.com/users/api_register";
-	    try
-	    {
-	        HttpPost post = new HttpPost(urlString);
+		try
+		{
+			HttpPost post = new HttpPost(urlString);
 
-	        MultipartEntity reqEntity = new MultipartEntity();
-	        reqEntity.addPart("data[User][username]", new StringBody(id));
-	        reqEntity.addPart("data[User][password]", new StringBody(password));
-	        reqEntity.addPart("data[User][name]", new StringBody(name));
-	        reqEntity.addPart("data[User][email]", new StringBody(email));
-	        reqEntity.addPart("data[User][department]", new StringBody(department));
-	        post.setEntity(reqEntity);
-	        HttpResponse response = client.execute(post);
-	        HttpEntity resEntity = response.getEntity();
-	        final String response_str = EntityUtils.toString(resEntity);
-	        if (resEntity != null) {
-	            Log.i("RESPONSE",response_str);
-	            JSONObject res = new JSONObject(response_str);
-	            return res.getBoolean("successful");
-	        }
-	    }
-	    catch (Exception ex){
-	        Log.e("Debug", "error: " + ex.getMessage(), ex);
-	    }
+			MultipartEntity reqEntity = new MultipartEntity();
+			reqEntity.addPart("data[User][username]", new StringBody(id));
+			reqEntity.addPart("data[User][password]", new StringBody(password));
+			reqEntity.addPart("data[User][name]", new StringBody(name));
+			reqEntity.addPart("data[User][email]", new StringBody(email));
+			reqEntity.addPart("data[User][department]", new StringBody(department));
+			post.setEntity(reqEntity);
+			HttpResponse response = client.execute(post);
+			HttpEntity resEntity = response.getEntity();
+			final String response_str = EntityUtils.toString(resEntity);
+			if (resEntity != null)
+			{
+				Log.i("RESPONSE", response_str);
+				JSONObject res = new JSONObject(response_str);
+				return res.getBoolean("successful");
+			}
+		} catch (Exception ex)
+		{
+			Log.e("Debug", "error: " + ex.getMessage(), ex);
+		}
 
-	    return false;
+		return false;
 	}
-	
-	
+
 	/**
 	 * @return a single quiz
 	 */
@@ -110,21 +110,22 @@ public class LoginRegisterServer
 		// that returns a list of quizzes names and a tag so i can make a list
 		// where the user chooses the quiz, it'll be great
 		String urlString = "http://quiz-creator.herokuapp.com/quizzes/json" + quizId;
-	    try
-	    {
-	        HttpGet get = new HttpGet(urlString);
-	        HttpResponse response = client.execute(get);
-	        HttpEntity resEntity = response.getEntity();
-	        final String response_str = EntityUtils.toString(resEntity);
-	        if (resEntity != null) {
-	            Log.i("RESPONSE",response_str);
-	            JSONObject res = new JSONObject(response_str);
-	            //return res.getBoolean("successful");
-	        }
-	    }
-	    catch (Exception ex){
-	        Log.e("Debug", "error: " + ex.getMessage(), ex);
-	    }
+		try
+		{
+			HttpGet get = new HttpGet(urlString);
+			HttpResponse response = client.execute(get);
+			HttpEntity resEntity = response.getEntity();
+			final String response_str = EntityUtils.toString(resEntity);
+			if (resEntity != null)
+			{
+				Log.i("RESPONSE", response_str);
+				JSONObject res = new JSONObject(response_str);
+				// return res.getBoolean("successful");
+			}
+		} catch (Exception ex)
+		{
+			Log.e("Debug", "error: " + ex.getMessage(), ex);
+		}
 
 		return Quiz.generateTemplateQuiz("Downloaded quiz", 5, 4);
 	}
@@ -144,8 +145,7 @@ public class LoginRegisterServer
 		return "4.0 / 13";
 
 	}
-	
-	
+
 	/**
 	 * @param studentInfo
 	 *            contains only the id and the password
@@ -161,4 +161,10 @@ public class LoginRegisterServer
 		result.setEmail("AnaAslnCrazy@gmail.com");
 		return result;
 	}
+
+	public static Boolean isCorrectQuizId(String id, StudentInfo loadLoginInfoFromPreferences)
+	{
+		return true;
+	}
+
 }

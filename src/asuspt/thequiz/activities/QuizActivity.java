@@ -45,11 +45,13 @@ public class QuizActivity extends Activity
 	private ListView questionsList;
 	private Quiz quiz;
 	private QuestionsListAdapter questionsListAdapter;
+	private String quizId;
 
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz);
+		String quizString = getIntent().getExtras().getString(MyUtils.QUIZ_ID);
 		loadQuiz();
 	}
 
@@ -180,7 +182,7 @@ public class QuizActivity extends Activity
 
 			// ask web minions to load the quiz
 			StudentInfo studentInfo = MyUtils.loadLoginInfoFromPreferences(getApplicationContext());
-			return LoginRegisterServer.loadQuiz("secret-id");
+			return LoginRegisterServer.loadQuiz(quizId);
 		}
 
 		protected void onPostExecute(Quiz result)
@@ -204,6 +206,9 @@ public class QuizActivity extends Activity
 
 	}
 
+	/**
+	 * grades the quiz
+	 */
 	class QuizGraderTask extends AsyncTask<Void, Void, String>
 	{
 		private ProgressDialog progressDialog;

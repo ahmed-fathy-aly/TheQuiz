@@ -19,7 +19,7 @@ public class HomeActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		startQuizActivity(null);
+		setContentView(R.layout.activity_home);
 
 	}
 
@@ -28,7 +28,7 @@ public class HomeActivity extends Activity
 	 */
 	public void startQuizActivity(View v)
 	{
-		Intent intent = new Intent(HomeActivity.this, QuizActivity.class);
+		Intent intent = new Intent(HomeActivity.this, QuizIdActivity.class);
 		startActivity(intent);
 	}
 
