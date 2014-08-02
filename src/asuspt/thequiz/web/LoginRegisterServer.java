@@ -14,6 +14,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.database.CursorJoiner.Result;
 import android.util.Log;
 import asuspt.thequiz.data.MCQ;
 import asuspt.thequiz.data.Quiz;
@@ -168,13 +169,9 @@ public class LoginRegisterServer
 			MultipartEntity reqEntity = new MultipartEntity();
 			reqEntity.addPart("data[Answers]",new StringBody(json_answers.toString()));
 			reqEntity.addPart("data[quiz_id]",new StringBody(quiz_id));
-			Log.i("RESPINSE","1");
 			post.setEntity(reqEntity);
-			Log.i("RESPINSE","2");
 			HttpResponse response = client.execute(post);
-			Log.i("RESPINSE","3");
 			HttpEntity resEntity = response.getEntity();
-			Log.i("RESPINSE","4");
 			final String response_str = EntityUtils.toString(resEntity);
 			if (resEntity != null)
 			{
@@ -199,7 +196,27 @@ public class LoginRegisterServer
 	 */
 	public static StudentInfo getCompleteStudentInfo(StudentInfo studentInfo)
 	{
-		StudentInfo result = new StudentInfo("619", "fsad");
+		String username = studentInfo.getId();
+		String urlString = "http://quiz-creator.herokuapp.com/users/api_info";
+		try
+		{
+			HttpPost post = new HttpPost(urlString);
+			MultipartEntity reqEntity = new MultipartEntity();
+			reqEntity.addPart("data[username]",new StringBody(username));
+			post.setEntity(reqEntity);
+			HttpResponse response = client.execute(post);
+			HttpEntity resEntity = response.getEntity();
+			final String response_str = EntityUtils.toString(resEntity);
+			if (resEntity != null)
+			{
+				Log.i("RESPONSE", response_str);
+				JSONObject res = new JSONObject(response_str);
+				
+			}
+		} catch (Exception ex)
+		{
+			Log.e("Debug", "error: " + ex.getMessage(), ex);
+		}
 		result.setName("Rey mysterio");
 		result.setQuizResults("Quiz 1 : 5 / 12\nQuiz 2 : 5 1 / 12");
 		result.setDepartment("Sorcery");
