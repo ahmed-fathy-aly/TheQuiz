@@ -26,6 +26,8 @@ public class MyUtils
 	public static final String GRADING_FAILED = "asuspt i am a bad web minion";
 	public static final String QUIZ_ID = "asuspt quiz id";
 
+	public static final String QUIZ_LOAD_FAILED = "quiz load failed";
+
 	/****
 	 * Method for Setting the Height of the ListView dynamically. Hack to fix
 	 * the issue of not showing all the items of the ListView when placed inside

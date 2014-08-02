@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
@@ -30,7 +31,16 @@ public class ProfileActivity extends Activity
 	 */
 	public void setGui(StudentInfo studentInfo)
 	{
-		// TODO @Ossama add the code that fills the textviews here
+		TextView id = (TextView) findViewById(R.id.textViewStudentID);
+		TextView email = (TextView) findViewById(R.id.textViewStudentEmail);
+		TextView department = (TextView) findViewById(R.id.textViewStudentDepartment);
+		TextView results = (TextView) findViewById(R.id.textViewStudentResults);
+		
+		id.setText(studentInfo.getId());
+		email.setText(studentInfo.getEmail());
+		department.setText(studentInfo.getDepartment());
+		results.setText(studentInfo.getQuizResults());
+
 
 	}
 

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import asuspt.thequiz.R;
+import asuspt.thequiz.data.Quiz;
 import asuspt.thequiz.utils.MyUtils;
 import asuspt.thequiz.web.LoginRegisterServer;
 import asuspt.thequiz.web.QuizServer;
@@ -45,8 +46,8 @@ public class QuizIdActivity extends Activity
 		{
 			EditText editTextId = (EditText) findViewById(R.id.editTextQuizId);
 			String id = editTextId.getText().toString();
-			return LoginRegisterServer.isCorrectQuizId(id, MyUtils
-					.loadLoginInfoFromPreferences(getApplicationContext()));
+			Quiz resultQuiz = LoginRegisterServer.loadQuiz(id);
+			return ! resultQuiz.getQuizTitle().equals(MyUtils.QUIZ_LOAD_FAILED);
 		}
 
 		@Override
