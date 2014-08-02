@@ -77,17 +77,7 @@ public class LoginActivity extends Activity
 
 			protected Boolean doInBackground(Integer... params)
 			{
-				// wait as if it'll take time to connect to server
-				try
-				{
-					synchronized (this)
-					{
-						wait(1000);
-					}
-				} catch (InterruptedException e)
-				{
-					e.printStackTrace();
-				}
+
 
 				// get the id and password
 				String id = editTextId.getText().toString();

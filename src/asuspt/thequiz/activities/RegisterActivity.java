@@ -22,6 +22,9 @@ public class RegisterActivity extends Activity
 	private EditText editTextPassword;
 	private EditText editTextpasswwordRepeat;
 	private EditText editTextName;
+	private EditText editTextDepartment;
+	private EditText editTextEmail;
+
 	private Button buttonRegister;
 
 	protected void onCreate(Bundle savedInstanceState)
@@ -42,6 +45,8 @@ public class RegisterActivity extends Activity
 		editTextPassword = (EditText) findViewById(R.id.editTextPassword);
 		editTextpasswwordRepeat = (EditText) findViewById(R.id.editTextPasswordRepeat);
 		editTextName = (EditText) findViewById(R.id.editTextName);
+		editTextDepartment = (EditText) findViewById(R.id.editTextDepartment);
+		editTextEmail = (EditText) findViewById(R.id.editTextEmail);
 		buttonRegister = (Button) findViewById(R.id.buttonRegister);
 
 		// add listeners
@@ -84,24 +89,14 @@ public class RegisterActivity extends Activity
 
 			protected Boolean doInBackground(Integer... params)
 			{
-				// wait as if it'll take time to connect to server
-				try
-				{
-					synchronized (this)
-					{
-						wait(3000);
-					}
-				} catch (InterruptedException e)
-				{
-					e.printStackTrace();
-				}
-
 				// get the id and password
 				String id = editTextId.getText().toString();
 				String password = editTextPassword.getText().toString();
 				String name = editTextName.getText().toString();
+				String department = editTextDepartment.getText().toString();
+				String email = editTextEmail.getText().toString();
 
-				return LoginRegisterServer.registerAccount(id, password, name);
+				return LoginRegisterServer.registerAccount(id, password, name, email, department);
 			}
 
 			protected void onPostExecute(Boolean result)

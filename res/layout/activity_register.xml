@@ -55,6 +55,28 @@
             android:inputType="textPersonName"
             android:textColor="#ccffffff"
             android:textColorHint="#88ffffff" />
+
+        <EditText
+            android:id="@+id/editTextDepartment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:ems="10"
+            android:hint="Department"
+            android:inputType="text"
+            android:textColor="#ccffffff"
+            android:textColorHint="#88ffffff" />
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textColor="#ccffffff"
+            android:textColorHint="#88ffffff" />
     </LinearLayout>
 
     <LinearLayout
