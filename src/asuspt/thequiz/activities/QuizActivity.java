@@ -51,8 +51,11 @@ public class QuizActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz);
+		Log.i("INFO","H1");
 		quizId = getIntent().getExtras().getString(MyUtils.QUIZ_ID);
+		Log.i("INFO","H2");
 		loadQuiz();
+		Log.i("INFO","H3");
 	}
 
 	/**
@@ -243,6 +246,8 @@ public class QuizActivity extends Activity
 				// start the grader activity
 				Intent intent = new Intent(getBaseContext(), QuizGraderActivity.class);
 				intent.putExtra(MyUtils.GRADE, result);
+				Log.i("ID",quizId);
+				intent.putExtra(MyUtils.QUIZ_ID, quizId);
 				startActivity(intent);
 				finish();
 			}

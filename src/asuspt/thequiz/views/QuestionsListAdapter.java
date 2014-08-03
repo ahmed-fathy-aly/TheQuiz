@@ -146,6 +146,7 @@ public class QuestionsListAdapter extends ArrayAdapter<Item>
 				View radioButton = radioGroup.findViewById(radioButtonID);
 				int idx = radioGroup.indexOfChild(radioButton);
 				result.add(idx);
+				Log.i("CHOICE", String.valueOf(idx));
 			}
 			else
 				result.add(-1);

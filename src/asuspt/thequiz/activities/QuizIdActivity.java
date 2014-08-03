@@ -46,8 +46,9 @@ public class QuizIdActivity extends Activity
 		{
 			EditText editTextId = (EditText) findViewById(R.id.editTextQuizId);
 			String id = editTextId.getText().toString();
-			Quiz resultQuiz = LoginRegisterServer.loadQuiz(id);
-			return ! resultQuiz.getQuizTitle().equals(MyUtils.QUIZ_LOAD_FAILED);
+			//Quiz resultQuiz = LoginRegisterServer.loadQuiz(id);
+			//return ! resultQuiz.getQuizTitle().equals(MyUtils.QUIZ_LOAD_FAILED);
+			return true;
 		}
 
 		@Override

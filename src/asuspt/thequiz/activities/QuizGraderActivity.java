@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.MailTo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +59,9 @@ public class QuizGraderActivity extends Activity
 	{
 		// Do something in response to button
 		Intent intent = new Intent(this, QuizActivity.class);
+		String quizId = getIntent().getExtras().getString(MyUtils.QUIZ_ID);
+		Log.i("ID",quizId);
+		intent.putExtra(MyUtils.QUIZ_ID, quizId);
 		startActivity(intent);
 		finish();
 	}

@@ -194,15 +194,11 @@ public class LoginRegisterServer
 	 */
 	public static StudentInfo getCompleteStudentInfo(StudentInfo studentInfo)
 	{
-		String username = studentInfo.getId();
 		String urlString = "http://quiz-creator.herokuapp.com/users/api_info";
 		try
 		{
-			HttpPost post = new HttpPost(urlString);
-			MultipartEntity reqEntity = new MultipartEntity();
-			reqEntity.addPart("data[username]", new StringBody(username));
-			post.setEntity(reqEntity);
-			HttpResponse response = client.execute(post);
+			HttpGet get = new HttpGet(urlString);
+			HttpResponse response = client.execute(get);
 			HttpEntity resEntity = response.getEntity();
 			final String response_str = EntityUtils.toString(resEntity);
 			if (resEntity != null)
